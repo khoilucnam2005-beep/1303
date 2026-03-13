@@ -98,7 +98,7 @@ namespace _1303
 
         // NÚT CHỌN SẢN PHẨM: Đẩy dữ liệu từ dòng đang chọn trên bảng lên TextBox
         private void btnChon_Click(object sender, RoutedEventArgs e)
-        {
+        {   
           
             // Đã sửa dgHienThiTatCa thành dgSanPham theo đúng tên bảng của bác
             if (dgSanPham.SelectedItems.Count > 0)
@@ -122,7 +122,50 @@ namespace _1303
                 MessageBox.Show("Vui lòng click chọn ít nhất một sản phẩm trong bảng!", "Thông báo");
             }
         }
-    
+
+       // NÚT XÓA SẢN PHẨM
+private void btnXoa_Click(object sender, RoutedEventArgs e)
+{
+    // Lấy danh sách các sản phẩm đang được bôi xanh (đã tích CheckBox)
+    var cacSanPhamCanXoa = dgSanPham.SelectedItems.Cast<SanPham>().ToList();
+
+    if (cacSanPhamCanXoa.Count > 0)
+    {
+        // Hiện hộp thoại hỏi xác nhận trước khi xóa cho an toàn
+        var xacNhan = MessageBox.Show($"Bạn có chắc chắn muốn xóa {cacSanPhamCanXoa.Count} sản phẩm đã chọn không?", 
+                                      "Xác nhận xóa", 
+                                      MessageBoxButton.YesNo, 
+                                      MessageBoxImage.Warning);
+
+        if (xacNhan == MessageBoxResult.Yes)
+        {
+            // Xóa từng sản phẩm đã chọn ra khỏi danh sách gốc
+            foreach (var sp in cacSanPhamCanXoa)
+            {
+                danhSachSP.Remove(sp);
+            }
+
+            // Cập nhật lại Số thứ tự (No) cho các sản phẩm còn lại để bảng trông đẹp mắt
+            for (int i = 0; i < danhSachSP.Count; i++)
+            {
+                danhSachSP[i].No = i + 1;
+            }
+
+            // Làm mới lại 2 bảng hiển thị
+            dgSanPham.ItemsSource = null;
+            dgSanPham.ItemsSource = danhSachSP;
+
+            dgSanPhamLoc.ItemsSource = null;
+            dgSanPhamLoc.ItemsSource = danhSachSP.Where(sp => sp.NamSX < 2000).ToList();
+
+            MessageBox.Show("Đã xóa thành công!", "Thông báo");
+        }
+    }
+    else
+    {
+        MessageBox.Show("Vui lòng tích chọn ít nhất một sản phẩm trong bảng để xóa!", "Thông báo");
+    }
+}
     }
 
 
@@ -135,5 +178,6 @@ namespace _1303
         public string TenSP { get; set; }
         public string NuocSX { get; set; }
         public int NamSX { get; set; }
+
     }
 }

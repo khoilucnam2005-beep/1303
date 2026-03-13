@@ -54,9 +54,10 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="btnNhap" Grid.Row="0" Content="Nhập" FontWeight="Bold" FontSize="14" Click="btnNhap_Click" Margin="0,5,0,5"/>
-                <Button x:Name="btnChon" Grid.Row="1" Content="Chọn sản phẩm" FontWeight="Bold" FontSize="14" Click="btnChon_Click" Margin="0,5,0,5"/>
-                <Button x:Name="btnThoat" Grid.Row="2" Content="Thoát" FontWeight="Bold" FontSize="14" Click="btnThoat_Click" Margin="0,5,0,5"/>
+                <Button x:Name="btnNhap" Grid.Row="0" Content="Nhập" FontWeight="Bold" FontSize="14" Click="btnNhap_Click" Margin="0,5,0,26"/>
+                <Button x:Name="btnChon" Content="Chọn sản phẩm" FontWeight="Bold" FontSize="14" Click="btnChon_Click" Margin="0,51,0,34" Grid.RowSpan="2"/>
+                <Button x:Name="btnThoat" Grid.Row="2" Content="Thoát" FontWeight="Bold" FontSize="14" Click="btnThoat_Click" Margin="0,25,0,2"/>
+                <Button x:Name="btnXoa" Grid.Row="1" Content="Xóa" FontWeight="Bold" FontSize="14" Click="btnXoa_Click" Margin="0,16,0,48" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
 
